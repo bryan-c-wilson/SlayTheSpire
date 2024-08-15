@@ -39,7 +39,7 @@ lapply(required_packages, library, character.only = TRUE)
 # Load data from the RDS file
 message("Starting to load data from RDS...")
 data <- tryCatch({
-  readRDS("data/november.rds")
+  readRDS("/Users/bryan/Documents/R_Projects/Slay_The_Spire/data/november.rds")
 }, error = function(e) {
   message("Error loading data: ", e$message)
   NULL
