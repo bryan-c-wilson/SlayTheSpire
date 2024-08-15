@@ -27,7 +27,7 @@ install_if_missing <- function(packages) {
 
 # List of required packages
 required_packages <- c("dplyr", "ggplot2", "googledrive", "googlesheets4", 
-                       "jsonlite", "lubridate", "tidyr", "tidyverse", "progress")
+                       "jsonlite", "lubridate", "tidyr", "tidyverse", "progress", "scales")
 
 # Install any missing packages
 install_if_missing(required_packages)
