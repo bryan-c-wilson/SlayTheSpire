@@ -73,3 +73,52 @@ ggplot(win_rate_by_character_by_ascension_level, aes(x = ascension_level, y = wi
        y = "Win Rate (%)") +
   scale_y_continuous(labels = scales::percent) +
   theme_minimal()
+
+# Step 9: Calculate top 5 relics in winning runs for each character, excluding starting relics which will appear in nearly all runs
+
+# Define the starting relics to exclude
+starting_relics <- c("Cracked Core", "Burning Blood", "Ring of the Snake", "PureWater")
+
+# Filter out starting relics, rank the remaining ones, and select the top 5
+top_5_relics_by_character <- nested_df %>%
+  filter(victory == TRUE) %>%
+  unnest(cols = relics) %>%
+  filter(!relics %in% starting_relics) %>%  # Exclude starting relics
+  group_by(character_chosen, relics) %>%
+  summarize(count = n()) %>%
+  mutate(rank = dense_rank(desc(count))) %>%  # Rank relics by frequency
+  filter(rank >= 1 & rank <= 5) %>%  # Select top 5 relics for each character
+  ungroup()
+
+# Calculate win rate for each relic
+relic_win_rate <- nested_df %>%
+  unnest(cols = relics) %>%
+  group_by(character_chosen, relics) %>%
+  summarize(
+    total_runs = n(),
+    victories = sum(victory == TRUE),
+    win_rate = victories / total_runs
+  ) %>%
+  ungroup()
+
+# Merge win rate data with the top 5 relics
+top_5_relics_with_win_rate <- top_5_relics_by_character %>%
+  left_join(relic_win_rate, by = c("character_chosen", "relics"))
+
+
+# Plot top 5 relics by appearances in winning runs and display win rate, which could be interpreted as percent chance of winning if you have that relic
+ggplot(top_5_relics_with_win_rate, aes(x = relics, y = count, fill = character_chosen)) +
+  geom_bar(stat = "identity") +
+  geom_line(aes(y = win_rate * max(count), group = 1), color = "black", size = 1, linetype = "dashed") +  # Add win rate line
+  geom_text(aes(label = paste0(round(win_rate * 100, 1), "%"), y = win_rate * max(count)), vjust = -0.5, linewidth = 3.5) +  # Annotate with win rates
+  facet_wrap(~ character_chosen, scales = "free_x") +
+  scale_x_discrete(drop = FALSE) +
+  scale_fill_manual(values = character_colors) +
+  labs(title = "Top 5 Winning Relics by Character with Win Rates",
+       x = "Relic",
+       y = "Count",
+       sec.axis = sec_axis(~./max(top_5_relics_with_win_rate$count), name = "Win Rate (%)")) +  # Add secondary axis
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+
