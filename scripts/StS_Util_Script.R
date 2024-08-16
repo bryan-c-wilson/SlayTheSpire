@@ -67,6 +67,7 @@ win_rate_by_character_by_ascension_level <- nested_df %>%
 ggplot(win_rate_by_character_by_ascension_level, aes(x = ascension_level, y = win_rate, color = character_chosen)) +
   geom_point(size = 3) +
   geom_smooth(method = "loess", se = FALSE) +  # Add a trend line
+  scale_color_manual(values = character_colors) +  # Apply custom colors
   labs(title = "Win Rate by Ascension Level and Character",
        x = "Ascension Level",
        y = "Win Rate (%)") +
