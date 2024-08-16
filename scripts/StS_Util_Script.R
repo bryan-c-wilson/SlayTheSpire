@@ -29,7 +29,7 @@ win_rate_by_character <- nested_df %>%
 cat("\nWin Rate by Character:\n")
 print(win_rate_by_character)
 
-# Step 6: Plot the win rates with custom colors to line up with the character art and percentage y-axis instead of float
+# Step 6: Plot the win rates with custom colors to line up with the character art and percentage y-axis instead of double
 library(ggplot2)
 library(scales)
 
@@ -50,3 +50,25 @@ ggplot(win_rate_by_character, aes(x = character_chosen, y = win_rate, fill = cha
        y = "Win Rate (%)") +
   theme_minimal() +
   theme(legend.position = "none")
+
+
+# Step 7: Calculate win rates by character by ascension level
+
+win_rate_by_character_by_ascension_level <- nested_df %>%
+  group_by(character_chosen, ascension_level) %>%
+  summarize(
+    total_runs = n(),
+    victories = sum(victory == TRUE, na.rm = TRUE),
+    win_rate = victories / total_runs
+  )
+
+# Step 8: Create scatter plot of win rates by character by ascension level
+
+ggplot(win_rate_by_character_by_ascension_level, aes(x = ascension_level, y = win_rate, color = character_chosen)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "loess", se = FALSE) +  # Add a trend line
+  labs(title = "Win Rate by Ascension Level and Character",
+       x = "Ascension Level",
+       y = "Win Rate (%)") +
+  scale_y_continuous(labels = scales::percent) +
+  theme_minimal()
