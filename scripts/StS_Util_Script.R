@@ -1,20 +1,20 @@
 # Utility script for analyzing Slay the Spire data
 
 ## Step 1: Explore and inspect data structure
-#str(data$event[[1]])
+# str(data$event[[1]])
 
 ## Step 2: Convert the list of nested data to a data frame
 nested_df <- bind_rows(data$event)
 
 ## Step 3: Display column names and data summary
-#cat("Column Names in Nested Data:\n")
-#print(colnames(nested_df))
+# cat("Column Names in Nested Data:\n")
+# print(colnames(nested_df))
 
-#cat("\nSummary of Nested Data:\n")
-#print(summary(nested_df))
+# cat("\nSummary of Nested Data:\n")
+# print(summary(nested_df))
 
-#cat("\nFirst Few Rows of Nested Data:\n")
-#print(head(nested_df))
+# cat("\nFirst Few Rows of Nested Data:\n")
+# print(head(nested_df))
 
 # Step 4: Calculate win rate by character (Reddit Data)
 win_rate_by_character_data <- nested_df %>%
@@ -47,7 +47,7 @@ combined_win_rates <- bind_rows(win_rate_by_character_data, win_rate_by_characte
 cat("\nCombined Win Rate by Character:\n")
 print(combined_win_rates)
 
-# Step 8: Plot the combined win rates with custom colors
+# Step 8: Define the plots
 library(ggplot2)
 library(scales)
 
@@ -72,19 +72,16 @@ simple_character_colors <- c(
 )
 
 # Plot win rates by character with internal labels for data source and no legend
-print(
-  ggplot(combined_win_rates, aes(x = character_chosen, y = win_rate, fill = interaction(character_chosen, source))) +
-    geom_bar(stat = "identity", position = "dodge") +
-    geom_text(aes(label = source), position = position_dodge(width = 0.9), vjust = -0.5, size = 3.5) +  # Add source labels inside the bars
-    scale_y_continuous(labels = percent) +  # Convert y-axis to percentage
-    scale_fill_manual(values = character_colors) +  # Apply custom colors
-    labs(title = "Win Rate by Character in Slay the Spire",
-         x = "Character",
-         y = "Win Rate (%)") +
-    theme_minimal() +
-    theme(legend.position = "none")  # Remove the legend
-)
-
+plot_win_rates <- ggplot(combined_win_rates, aes(x = character_chosen, y = win_rate, fill = interaction(character_chosen, source))) +
+  geom_bar(stat = "identity", position = "dodge") +
+  geom_text(aes(label = source), position = position_dodge(width = 0.9), vjust = -0.5, size = 3.5) +  # Add source labels inside the bars
+  scale_y_continuous(labels = percent) +  # Convert y-axis to percentage
+  scale_fill_manual(values = character_colors) +  # Apply custom colors
+  labs(title = "Win Rate by Character in Slay the Spire",
+       x = "Character",
+       y = "Win Rate (%)") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Remove the legend
 
 # Step 9: Calculate win rates by character by ascension level (Reddit Data)
 win_rate_by_character_by_ascension_level <- nested_df %>%
@@ -96,17 +93,15 @@ win_rate_by_character_by_ascension_level <- nested_df %>%
   )
 
 # Step 10: Create scatter plot of win rates by character by ascension level (Reddit Data)
-# Create the scatter plot with the simplified colors
-print(ggplot(win_rate_by_character_by_ascension_level, aes(x = ascension_level, y = win_rate, color = character_chosen)) +
-        geom_point(size = 3) +
-        geom_smooth(method = "loess", se = FALSE) +  # Add a trend line
-        scale_color_manual(values = simple_character_colors) +  # Apply simple colors
-        labs(title = "Win Rate by Ascension Level and Character",
-             x = "Ascension Level",
-             y = "Win Rate (%)") +
-        scale_y_continuous(labels = scales::percent) +
-        theme_minimal()
-)
+plot_ascension_level <- ggplot(win_rate_by_character_by_ascension_level, aes(x = ascension_level, y = win_rate, color = character_chosen)) +
+  geom_point(size = 3) +
+  geom_smooth(method = "loess", se = FALSE) +  # Add a trend line
+  scale_color_manual(values = simple_character_colors) +  # Apply simple colors
+  labs(title = "Win Rate by Ascension Level and Character",
+       x = "Ascension Level",
+       y = "Win Rate (%)") +
+  scale_y_continuous(labels = scales::percent) +
+  theme_minimal()
 
 # Step 11: Calculate top 5 relics in winning runs for each character, excluding starting relics (Reddit Data)
 
@@ -140,18 +135,34 @@ top_5_relics_with_win_rate <- top_5_relics_by_character %>%
   left_join(relic_win_rate, by = c("character_chosen", "relics"))
 
 # Plot top 5 relics by appearances in winning runs and display win rate (Reddit Data)
-# Plot top 5 relics by appearances in winning runs with just the simple colors, will need to update when comparing with bryan_data later
-print(ggplot(top_5_relics_with_win_rate, aes(x = relics, y = count, fill = character_chosen)) +
-        geom_bar(stat = "identity") +
-        geom_line(aes(y = win_rate * max(count), group = 1), color = "black", size = 1, linetype = "dashed") +  # Add win rate line
-        geom_text(aes(label = paste0(round(win_rate * 100, 1), "%"), y = win_rate * max(count)), vjust = -0.5, size = 3.5) +  # Annotate with win rates
-        facet_wrap(~ character_chosen, scales = "free_x") +
-        scale_x_discrete(drop = FALSE) +
-        scale_fill_manual(values = simple_character_colors) +
-        labs(title = "Top 5 Winning Relics by Character with Win Rates",
-             x = "Relic",
-             y = "Count",
-             sec.axis = sec_axis(~./max(top_5_relics_with_win_rate$count), name = "Win Rate (%)")) +  # Add secondary axis
-        theme_minimal() +
-        theme(axis.text.x = element_text(angle = 45, hjust = 1))
-)
+plot_top_5_relics <- ggplot(top_5_relics_with_win_rate, aes(x = relics, y = count, fill = character_chosen)) +
+  geom_bar(stat = "identity") +
+  geom_line(aes(y = win_rate * max(count), group = 1), color = "black", size = 1, linetype = "dashed") +  # Add win rate line
+  geom_text(aes(label = paste0(round(win_rate * 100, 1), "%"), y = win_rate * max(count)), vjust = -0.5, size = 3.5) +  # Annotate with win rates
+  facet_wrap(~ character_chosen, scales = "free_x") +
+  scale_x_discrete(drop = FALSE) +
+  scale_fill_manual(values = simple_character_colors) +
+  labs(title = "Top 5 Winning Relics by Character with Win Rates",
+       x = "Relic",
+       y = "Count",
+       sec.axis = sec_axis(~./max(top_5_relics_with_win_rate$count), name = "Win Rate (%)")) +  # Add secondary axis
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1))
+
+# Step 12: Save plots as PNG files
+output_dir <- "Slay_The_Spire/images"
+
+# Create the output directory if it does not exist
+if (!dir.exists(output_dir)) {
+  dir.create(output_dir, recursive = TRUE)
+}
+
+# Print each plot
+print(plot_win_rates)
+print(plot_ascension_level)
+print(plot_top_5_relics)
+
+# Save each plot
+ggsave(filename = file.path(output_dir, "win_rates_by_character.png"), plot = plot_win_rates, width = 10, height = 6)
+ggsave(filename = file.path(output_dir, "win_rate_by_ascension_level.png"), plot = plot_ascension_level, width = 10, height = 6)
+ggsave(filename = file.path(output_dir, "top_5_relics_with_win_rates.png"), plot = plot_top_5_relics, width = 12, height = 8)
