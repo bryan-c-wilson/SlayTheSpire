@@ -48,7 +48,7 @@ bryan_rds_path <- "Slay_The_Spire/data/bryan.rds"
 if (!file.exists(bryan_rds_path)) {
   directories <- c("Slay_The_Spire/Bryan's Run Data/runs/DEFECT",
                    "Slay_The_Spire/Bryan's Run Data/runs/IRONCLAD",
-                   "Slay_The_Spire/Bryan's Run Data/runs/SILENT",
+                   "Slay_The_Spire/Bryan's Run Data/runs/THE_SILENT",
                    "Slay_The_Spire/Bryan's Run Data/runs/WATCHER")
   combine_and_save_runs(directories, bryan_rds_path)
 }
