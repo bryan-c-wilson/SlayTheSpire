@@ -16,8 +16,8 @@ install_if_missing <- function(packages) {
 }
 
 # List of required packages
-required_packages <- c("dplyr", "ggplot2", "googledrive", "googlesheets4", 
-                       "jsonlite", "lubridate", "tidyr", "tidyverse", "progress", "scales")
+required_packages <- c("dplyr", "ggplot2", "googledrive", "googlesheets4", "magrittr",
+                       "jsonlite", "lubridate", "tidyr", "tidyverse", "progress", "scales", "pacman", "rio", "randomForest")
 
 # Install any missing packages
 install_if_missing(required_packages)
@@ -44,7 +44,7 @@ combine_and_save_runs <- function(directories, output_path) {
 }
 
 # Check if bryan.rds exists, if not, create it
-bryan_rds_path <- "Slay_The_Spire/data/bryan.rds"
+bryan_rds_path <- "/Users/bryan/Documents/R_Projects/Slay_The_Spire/data/bryan.rds"
 if (!file.exists(bryan_rds_path)) {
   directories <- c("Slay_The_Spire/Bryan's Run Data/runs/DEFECT",
                    "Slay_The_Spire/Bryan's Run Data/runs/IRONCLAD",
@@ -54,7 +54,7 @@ if (!file.exists(bryan_rds_path)) {
 }
 
 # Check if november.rds exists, if not, create it from JSON
-november_rds_path <- "Slay_The_Spire/data/november.rds"
+november_rds_path <- "/Users/bryan/Documents/R_Projects/Slay_The_Spire/data/november.rds"
 if (!file.exists(november_rds_path)) {
   message("november.rds not found. Converting from JSON...")
   data <- jsonlite::fromJSON("data/november.json")
