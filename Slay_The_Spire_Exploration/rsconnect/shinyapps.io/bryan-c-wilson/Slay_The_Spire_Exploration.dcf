@@ -1,0 +1,12 @@
+name: Slay_The_Spire_Exploration
+title: Slay_The_Spire_Exploration
+username: bryan-c-wilson
+account: bryan-c-wilson
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 12767043
+bundleId: 9122572
+url: https://bryan-c-wilson.shinyapps.io/Slay_The_Spire_Exploration/
+version: 1
+asMultiple: FALSE
+asStatic: FALSE

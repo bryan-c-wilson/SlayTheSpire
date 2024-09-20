@@ -1,0 +1,78 @@
+Monster Name,HP,Move 1,Move 2,Move 3,Move 4,Move 5,Move 6,Notes,AI
+Awakened One,,,,,,,,Spawns with 2 cultists,
+Stage 1,300,Soul Strike,Slash,Rebirth,,,,Innate Regen 10 (15),"Always begins with Slash. Afterwards, has a 25% chance of using Soul Strike and a 75% chance of Slash, except Soul Strike cannot be used twice in a row and slash cannot be used three times in a row. Becomes ""half dead"" and uses Rebirth upon hitting 0 hp."
+,,Damage 6x4,Damage 20,Start Stage 2,,,,Innate Curiosity 1 (2),
+,320,,,,,,,Innate Strength 2,
+,,,,,,,,,
+Stage 2,300,Dark Echo,Sludge,Tackle,,,,Cleanses all debuffs for stage 2,"Always begins with Dark Echo. Afterwards, has a 50% chance of using Sludge or Tackle, except neither can be used three times in a row."
+,,Damage 40,"Damage 18, Void 1*",Damage 10x3,,,,Loses Curiosity,
+,320,,,,,,,*Void goes into the Draw Pile,
+,,,,,,,,,
+Bronze Automaton,300,Spawn Orbs,HYPER BEAM,Stunned,Boost,Flail,,Innate Artifact 3,"Deterministic order. First, uses Spawn Orbs. Afterwards, cycles in the order of Flail -> Boost -> Flail -> Boost -> HYPER BEAM -> Stunned. In Ascension 19, uses Boost instead of Stunned."
+,,Summons 2 Bronze Orbs,Damage 45,Skip Turn,"Strength 3, Block 9",Damage 7x2,,,
+,320,,Damage 50,,"Strength 4, Block 9",Damage 8x2,,,
+,,,,,"Strength 4, Block 12",,,,
+,,,,,,,,,
+Bronze Orb,52-58,Support Beam,Beam,Stasis,,,,"Stasis always steals a random card of the highest rarity in your draw pile (or discard pile, if the draw pile is empty).","Has a 75% chance of using Stasis until it has been used. Otherwise, has a 70% chance of using Support Beam and 30% chance of using Beam, but cannot use the same move 3 times in a row."
+,,Block Bronze Automaton 12,Damage 8,Steal Card,,,,,
+,54-60,,,,,,,,
+The Champ,420,Face Slap,Taunt,Defensive Stance,Gloat,Heavy Slash,,Enrages when reaching below 50% hp (no indicator),"Every 4 turns, uses Taunt. Otherwise, approximately (15/15/25/45) (30/0/25/45) probability split between (Defensive Stance/Gloat/Face Slap/Heavy Slash). No move can be used twice in a row, and Defensive Stance cannot be used more than 2 times, total (this applies to enraged too). When attempting to use an invalid move, will use the next move in the order of Defensive Stance -> Gloat -> Face Slap -> Heavy Slash -> Face Slap (instead of even probability distribution)."
+,,"Damage 12, Frail + Vuln 2",Weak + Vuln 2,"Block 15, Metallicize 5",Strength 2,Damage 16,,,
+,440,"Damage 14, Frail + Vuln 2",,"Block 18, Metallicize 6",Strength 3,Damage 18,,,
+,,,,"Block 20, Metallicize 7",Strength 4,,,,
+,,,,,,,,,
+,,,,,,,,,
+Enraged (below 50% HP),,Anger,Execute,Defensive Stance,Gloat,Heavy Slash,Face Slap,,"First, uses Anger. Then, next turn and every three turns thereafter, uses Execute. Otherwise, approximately a (15/15/25/45) (30/0/25/45) probability split between (Defensive Stance/Gloat/Face Slap/Heavy Slash). When attempting to use an invalid move, will use the next move in the order of Defensive Stance -> Gloat -> Face Slap -> Heavy Slash -> Face Slap (instead of even probability distribution)."
+,,"Cleanse Debuffs, Strength 6",Damage 10x2,See above,See above,See above,See above,,
+,,"Cleanse Debuffs, Strength 9","""DIE . . .""",,,,,,
+,,"Cleanse Debuffs, Strength 12","""Face my wrath!""",,,,,,
+,,,,,,,,,
+,,,,,,,,,
+The Collector,282,Spawn,Revive,Buff,(Mega Debuff),Fireball,,,"Always begins with Spawn. On turn 4, always uses the Mega Debuff. Otherwise, if a Torch Head is dead, has approximately a (25/45/30) probability split between (Revive/Fireball/Buff). If all Torch Heads are alive, the split becomes (70/30) between (Fireball/Buff). Cannot use Revive or Buff twice in a row, or Fireball three times in a row."
+,,Spawn 2 Torch Heads,Spawn Torch Heads in empty slots (max 2),"Block 15, Team Str 3",Weak + Vuln + Frail 3,Damage 18,,,
+,300,,,"Block 15, Team Str 4",,Damage 21,,,
+,,,,"Block 18, Team Str 4",,,,,
+,,,,"Block 23, Team Str 5",Weak + Vuln + Frail 5,,,,
+Torch Head,38-40,Tackle,,,,,,,
+,,Damage 7,,,,,,,
+,40-45,,,,,,,,
+Corrupt Heart,750,Blood Shots,Echo,Debilitate,(Buff),**List of Additional Buffs:,,Innate Invincible 300 (200),"Always begins with Debilitate. Every 3 turns, starting from turn 4, uses Buff. Otherwise, has an equal chance of either using Blood Shots followed by Echo or Echo followed by Blood Shots."
+,,Damage 2x12,Damage 40,"Vuln + Weak + Frail 2, All Status cards 1*","Cleanse Strength Down, Strength 2, Additional Buff**",First Buff: Artifact 2,,Innate Beat of Death 1 (2),
+,800,Damage 2x15,Damage 45,,,Second Buff: Beat of Death 1,,*All Status cards go into the Draw Pile,
+,,,,,,Third Buff: Painful Stabs,,,
+,,,,,,Fourth Buff: Strength 10,,,
+,,,,,,Fifth+ Buff: Strength 50,,,
+Donu and Deca,,,,,,,,,
+Donu,250,Circle of Power,Beam,,,,,Innate Artifact 2 (3),"Always begins by using Circle of Power, and then alternates between its two moves."
+,,Team Strength 3,Damage 10x2,,,,,,
+,265,,Damage 12x2,,,,,,
+,,,,,,,,,
+Deca,250,Square of Protection,Beam,,,,,Innate Artifact 2 (3),"Always begins by using Beam, and then alternates between its two moves."
+,,Team Block 16,"Damage 10x2, Daze 2*",,,,,*Dazes go into the Discard Pile,
+,265,"Team Block 16, Team Plated Armor 3","Damage 12x2, Daze 2*",,,,,,
+,,,,,,,,,
+The Guardian,240 (250),,,,,,,,
+Offensive Mode,,Charge Up,Fierce Bash,Vent Steam,Whirlwind,,,"After receiving 30 + 10*X (35 + 10*X) (40 + 10*X) damage, gains 20 block and immediately enters Defensive Mode. X is the number of such transitions that have occured.","Always cycles in the order of Charge Up -> Fierce Bash -> Vent Steam -> Whirlwind. The fight always begins with Charge Up. After using Twin Slam in defensive mode, Whirlwind is used next."
+,,Block 9,Damage 32,Weak + Vuln 2,Damage 5x4,,,,
+,,,Damage 36,,,,,,
+,,,,,,,,,
+Defensive Mode,,Close Up,Roll Attack,Twin Slam,,,,Sharp Hide returns 3 (4) damage after an Attack card is played. It is not the same effect as Thorns.,"Always uses Close Up, then Roll Attack, then Twin Slam (after which he returns to offensive mode with Whirlwind)."
+,,Sharp Hide 3,Damage 9,Enter Offensive Mode,,,,,
+,,,Damage 10,Damage 8x2,,,,,
+,,Sharp Hide 4,,Remove Sharp Hide,,,,,
+Hexaghost,250,Divider,Inferno,Inflame,Sear,Tackle,Activate,H = (Player's Current HP / 12) + 1,"Always begins with Activate, then Divider. Afterwards, cycles in the order of Sear -> Tackle -> Sear -> Inflame -> Tackle -> Sear -> Inferno, with 0-6 orbs active, respectively."
+,,Damage Hx6,"Damage 2x6, Burn 3*","Strength 2, Block 12","Damage 6, Burn 1",Damage 5x2,(does nothing),*Burns go into the Discard Pile,
+,264,(deactivates orbs),Upgrade all Burns,,,,(ignites orbs),,
+,,,Sear gives Burn+,,,,,,
+,,,Deactivates Orbs,,,Damage 6x2,,,
+,,,"Damage 3x6, Burn 3*","Strength 3, Block 12","Damage 6, Burn 2*",,,,
+Slime Boss,140,Goop Spray,Preparing,Slam,Split,,,Splits into a Spike Slime (L) and an Acid Slime (L) if HP is 50% or below,Always cycles in the order of Goop Spray -> Preparing -> Slam.
+,,Slimed 3*,Skip Turn,Damage 35,,,,,
+,150,,,Damage 38,,,,*Slimed go into the Discard Pile,
+,,Slimed 5*,,,,,,,
+Time Eater,456,Ripple,Reverberate,Head Slam,Haste,,,Innate Time Warp,"Always uses Haste once, immediately after reaching below 50% HP. Otherwise, approximately a (20/45/35) probability split between Ripple, Reverberate, and Head Slam, except Ripple and Head Slam cannot be used twice in a row, and Reverberate cannot be used three times in a row."
+,,"Block 20, Vuln + Weak 1",Damage 7x3,"Damage 26, Draw Reduction 1",Cleanse Debuffs,,,Draw Reduction lasts for 2 turns,
+,480,,,,Heal to 50% HP,,,*Slimed go into the Draw Pile,
+,,,Damage 8x3,"Damage 32, Draw Reduction 1",,,,,
+,,,,,,,,,
+,,"Block 20, Vuln, Weak, Frail 1",,"Damage 32, Draw Reduction 1,Slimed 2*","Heal to 50% HP, Block 32",,,,
