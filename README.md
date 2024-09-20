@@ -17,3 +17,6 @@ JSON files were slow to upload so I converted to RDS to run faster. This is docu
 ### Sample Data
 
 A small sample dataset is included in the `data/` directory for testing purposes.
+
+
+You can interact with the live version of this R Shiny app exploring deaths in Slay the Spire data here: https://bryan-c-wilson.shinyapps.io/Slay_The_Spire_Exploration/
